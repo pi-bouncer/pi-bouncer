@@ -12,9 +12,9 @@
   boot.loader.generic-extlinux-compatible.configurationLimit = 4;
 
   boot.kernelParams = [
-    "modprobe.blacklist=pps_ldisc" 
-    "console=ttyAMA0,115200n8" 
-  ]; 
+    "modprobe.blacklist=pps_ldisc"
+    "console=ttyAMA0,115200n8"
+  ];
 
   services.journald = {
     extraConfig = ''
@@ -22,7 +22,7 @@
     '';
   };
 
-  sdImage = 
+  sdImage =
   let
     extlinux-conf-builder =
       import <nixpkgs/nixos/modules/system/boot/loader/generic-extlinux-compatible/extlinux-conf-builder.nix> {
