@@ -1,8 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./modules/pibouncer.nix
-    ./profiles/raspberrypi.nix
+    <pi-bouncer>
   ];
 
   environment.systemPackages = with pkgs; [

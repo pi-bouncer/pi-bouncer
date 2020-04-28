@@ -1,2 +1,2 @@
-export NIX_PATH="$NIX_PATH:/etc:pibouncer=$(pwd)"
+export NIX_PATH="$NIX_PATH:/etc:pi-bouncer=$(pwd)/modules"
 nix-build --cores 0 '<nixpkgs/nixos>' -I nixos-config=default.nix -A config.system.build.sdImage -o bouncer

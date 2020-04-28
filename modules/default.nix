@@ -9,6 +9,8 @@ with lib;
     ./pps.nix
     ./tor.nix
     ./wg.nix
+
+    ../profiles/raspberrypi.nix
   ];
 
   options = {
