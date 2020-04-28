@@ -1,0 +1,5 @@
+Host bouncer
+  User root
+  Hostname 192.168.0.2
+  Port 22
+  IdentityFile ~/.ssh/id_ed25519

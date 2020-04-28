@@ -1,0 +1,3 @@
+export NIX_PATH="$NIX_PATH:pibouncer=$(pwd)"
+export NIXOS_CONFIG=$(pwd)/default.nix
+nixos-rebuild switch --build-host localhost --target-host bouncer
