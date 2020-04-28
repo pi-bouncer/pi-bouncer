@@ -30,7 +30,7 @@
   services.znc = {
     enable = true;
     useLegacyConfig = false;
-    mutable = false;  # immutable config, replaced on each update
+    mutable = true;  # mutable config, configurable via web or controlpanel
     openFirewall = true;
 
     proxychains.enable = config.pibouncer.tor.enable;
