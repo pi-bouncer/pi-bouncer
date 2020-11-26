@@ -3,5 +3,5 @@ secrets
 configs/secret
 
 bouncer
-result
+result*
 testing
