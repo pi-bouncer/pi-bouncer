@@ -6,15 +6,15 @@ with lib;
     ./gps.nix
     ./ntp.nix
     ./pps.nix
+    ./rpi.nix
     ./tor.nix
+    ./znc.nix
     ./wg.nix
-
-    ../profiles/raspberrypi.nix
   ];
 
   options = {
     pibouncer = {
-      enable = mkEnableOption "Enable pi-bouncer gateway";
+      enable = mkEnableOption "pi-bouncer";
 
       port = mkOption {
         type = types.port;
