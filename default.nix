@@ -1,68 +1,63 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+with lib;
+
 {
   imports = [
-    <pi-bouncer>
-    ./profiles/raspberrypi.nix
+    ./modules/gps.nix
+    ./modules/ntp.nix
+    ./modules/pps.nix
+    ./modules/rpi.nix
+    ./modules/tor.nix
+    ./modules/znc.nix
+    ./modules/wg.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    # add additional packages if needed
-    # irssi
-  ];
+  options = {
+    pibouncer = {
+      enable = mkEnableOption "pi-bouncer";
 
-  users.extraUsers.root.openssh.authorizedKeys.keys = with (import ./ssh-keys.nix); [
-    example
-  ];
-
-  pibouncer = {
-    enable = true;
-    tor.enable = true;
-    port = 6697; # public facing port
-
-    rpi.enable = true;
-    rpi.leds.enable = true;
-  };
-
-  services.znc.config = {
-    LoadModule = [ "webadmin" "adminlog" ];
-    MaxBufferSize = 500;
-    Listener.l.Port = config.pibouncer.port;
-    Listener.l.SSL = true;
-
-    User.example = {
-      Admin = true;
-      Nick = "pi-bouncer-example";
-      RealName = "https://github.com/pi-bouncer/pi-bouncer";
-      AltNick = "pi-bouncer-example";
-      LoadModule = [ "chansaver" "controlpanel" "sasl" ];
-
-      MultiClients = true;
-      PrependTimeStamp = true;
-
-      Network.freenode = {
-        Server = "chat.freenode.net +6697";
-        LoadModule = [
-          "keepnick"
-        ];
-        Chan = {
-          "#pi-bouncer" = { };
-          "#nixos" = { Disabled = true; };
-          "##linux" = { Disabled = true; };
-          "#znc" = { Disabled = true; };
-          # "#detached-example" = { Detached = true; };
-        };
+      port = mkOption {
+        type = types.port;
+        description = "Port used for ZNC IRC frontend and Tor hidden service (if enabled)";
+        default = 6697;
       };
 
-      # generate password with
-      # nix-shell -p znc --run "znc --makepass"
-
-      Pass.password = {
-        Method = "sha256";
-        Hash = "e2ce303c7ea75c571d80d8540a8699b46535be6a085be3414947d638e48d9e93";
-        Salt = "l5Xryew4g*!oa(ECfX2o";
+      develMode = mkOption {
+        type = types.bool;
+        description = "Use for development only to e.g. autologin root";
+        default = false;
       };
     };
   };
 
-  system.stateVersion = "21.03";
+  config = mkMerge [
+    (mkIf config.pibouncer.enable {
+
+      # enables chrony but systemd default ntp is fine in this case
+      #pibouncer.ntp.enable = mkDefault true;
+      services.openssh.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        libgpiod
+      ];
+    })
+
+    (mkIf config.pibouncer.develMode {
+      services.openssh.permitRootLogin = "yes";
+      services.mingetty.autologinUser = "root";
+
+      users.extraUsers.root.initialHashedPassword = "";
+
+      environment.systemPackages = with pkgs; [
+        git
+        vim
+        stdenv
+        stdenvNoCC
+      ];
+
+      warnings = lib.singleton ''
+        Development mode enabled
+      '';
+    })
+  ];
 }

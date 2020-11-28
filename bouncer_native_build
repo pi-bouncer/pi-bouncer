@@ -2,6 +2,6 @@ export NIX_PATH="$NIX_PATH:pi-bouncer=$(pwd)"
 nix-build \
   '<nixpkgs/nixos>' \
   --cores 0 \
-  -I nixos-config=with-cross.nix \
+  -I nixos-config=example.nix \
   -A config.system.build.sdImage \
   -o bouncer

@@ -11,14 +11,33 @@ as well.
 Currently tested with RasberryPi 2 & 3 boards. Support for RasberryPi 0, 1 and 4
 is planned as well.
 
+## Configuring
+
+You can base your configuration on the [example.nix](./example.nix) which
+allows to build SD image for RaspberryPi 2 & 3.
+
+It configures ZNC with mutable config - it allows to change its config via
+`webadmin` or `controlpanel` modules. Further configuration made via Nix
+won't overwrite existing configuration.
+
+To switch to immutable configuration set
+
+```nix
+services.znc.mutable = false;
+```
+
+which replaces ZNC config on start to match Nix configuration.
+
 ## Build
 
-To build a mutable version (that allows to change its config via
-`webadmin` or `controlpanel` modules) use the provided `nix-build` wrapper.
+To cross compile SD image use the provided `nix-build` wrapper.
 
 ```bash
-./bouncer_build
+./bouncer_cross_build
 ```
+
+This cross compiles the image from e.g. `x86` to `armv7l` using [with-cross.nix](./with-cross.nix).
+
 
 ## Flash
 

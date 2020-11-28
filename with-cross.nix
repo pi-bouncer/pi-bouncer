@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./default.nix
+    ./example.nix
   ];
 
   nixpkgs.crossSystem = {
