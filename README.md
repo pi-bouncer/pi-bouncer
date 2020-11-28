@@ -8,7 +8,7 @@ Quickly roll your own self-hosted IRC bouncer thanks to the power of
 This mainly targets RasberryPi boards but should be usable as a NixOS module
 as well.
 
-Currently tested with RasberryPi 2 & 3 boards. Support for RasberryPi 1 and 0
+Currently tested with RasberryPi 2 & 3 boards. Support for RasberryPi 0, 1 and 4
 is planned as well.
 
 ## Build
