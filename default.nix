@@ -31,9 +31,9 @@
 
     User.example = {
       Admin = true;
-      Nick = "example";
-      RealName = "example";
-      AltNick = "exampleToo";
+      Nick = "pi-bouncer-example";
+      RealName = "https://github.com/pi-bouncer/pi-bouncer";
+      AltNick = "pi-bouncer-example";
       LoadModule = [ "chansaver" "controlpanel" "sasl" ];
 
       MultiClients = true;
@@ -45,8 +45,11 @@
           "keepnick"
         ];
         Chan = {
-          "#nixos" = { Detached = false; };
+          "#pi-bouncer" = { };
+          "#nixos" = { Disabled = true; };
           "##linux" = { Disabled = true; };
+          "#znc" = { Disabled = true; };
+          # "#detached-example" = { Detached = true; };
         };
       };
 
