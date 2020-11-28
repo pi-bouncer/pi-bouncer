@@ -46,9 +46,9 @@ with lib;
     (mkIf config.pibouncer.develMode {
       services.openssh.permitRootLogin = "yes";
       services.mingetty.autologinUser = "root";
- 
+
       users.extraUsers.root.initialHashedPassword = "";
- 
+
       environment.systemPackages = with pkgs; [
         git
         vim
