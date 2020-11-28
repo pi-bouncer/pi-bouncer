@@ -9,7 +9,7 @@ with lib;
   };
 
   config = mkIf config.pibouncer.tor.enable {
-    services.proxychains.enable = true;
+    programs.proxychains.enable = true;
 
     services.tor = {
       enable = true;
