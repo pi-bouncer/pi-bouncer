@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }:
+
+# rPi 2 & 3, armv7l (32bit)
+
 {
   imports = [
     ./arm-headless.nix
