@@ -14,6 +14,9 @@
   boot.loader.generic-extlinux-compatible.enable = true;
   boot.loader.generic-extlinux-compatible.configurationLimit = 4;
 
+  boot.consoleLogLevel = lib.mkDefault 7;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.kernelParams = [
     "modprobe.blacklist=pps_ldisc"
     "console=ttyAMA0,115200n8"

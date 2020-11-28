@@ -4,7 +4,6 @@ with lib;
 {
   imports = [
     ./gps.nix
-    ./kernel.nix
     ./ntp.nix
     ./pps.nix
     ./tor.nix
