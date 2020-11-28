@@ -60,9 +60,6 @@
         cp ${pkgs.ubootRaspberryPi3_32bit}/u-boot.bin firmware/u-boot-rpi3.bin
         cp ${configTxt} firmware/config.txt
       '';
-        # we used these before to avoid gps output breaking boot
-        #cp ${pkgs.ubootRaspberryPi2_NoDelays}/u-boot.bin firmware/u-boot-rpi2.bin
-        #cp ${pkgs.ubootRaspberryPi3_32bit_NoDelays}/u-boot.bin firmware/u-boot-rpi3.bin
     populateRootCommands = ''
         mkdir -p ./files/boot
         ${extlinux-conf-builder} -t 3 -c ${config.system.build.toplevel} -d ./files/boot
