@@ -14,4 +14,11 @@
 
   # this pulls spidermonkey and firefox
   security.polkit.enable = false;
+
+  # mailutils won't cross
+  nixpkgs = {
+    overlays = [(self: super: {
+      smartmontools = super.smartmontools.override { mailutils = null; };
+    })];
+  };
 }
