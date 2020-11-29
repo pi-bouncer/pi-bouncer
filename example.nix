@@ -34,7 +34,7 @@
       Nick = "pi-bouncer-example";
       RealName = "https://github.com/pi-bouncer/pi-bouncer";
       AltNick = "pi-bouncer-example";
-      LoadModule = [ "chansaver" "controlpanel" "sasl" ];
+      LoadModule = [ "cert" "chansaver" "controlpanel" "sasl" ];
 
       MultiClients = true;
       PrependTimeStamp = true;
