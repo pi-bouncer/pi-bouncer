@@ -16,7 +16,7 @@
 
   pibouncer = {
     enable = true;
-    tor.enable = true;
+    # tor.enable = true;
     port = 6697; # public facing port
 
     rpi.enable = true;
